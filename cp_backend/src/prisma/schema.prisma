@@ -1,0 +1,45 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                String    @id @default(cuid())
+  email             String    @unique
+  name              String
+  googleId          String    @unique
+  tier              String    @default("free")
+  voiceProfile      String    @default("developer")
+  customVoicePrompt String?
+  quotaUsed         Int       @default(0)
+  quotaResetAt      DateTime  @default(now())
+  razorpayCustomerId     String?
+  razorpaySubscriptionId String?
+  onboardingDone    Boolean   @default(false)
+  createdAt         DateTime  @default(now())
+  jobs              Job[]
+}
+
+model Job {
+  id            String   @id @default(cuid())
+  userId        String
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  status        String   @default("pending")
+  inputType     String
+  inputUrl      String?
+  inputText     String?
+  voiceProfile  String
+  twitterThread String?  @db.Text
+  linkedinPost  String?  @db.Text
+  newsletter    String?  @db.Text
+  shortHook     String?  @db.Text
+  errorMessage  String?
+  createdAt     DateTime @default(now())
+
+  @@index([userId])
+  @@index([userId, createdAt])
+}

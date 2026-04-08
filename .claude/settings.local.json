@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cp -r backend cp_backend)",
+      "Bash(cp -r frontend cp_frontend)"
+    ]
+  }
+}
