@@ -21,9 +21,9 @@ export default function InputTabs({ onSubmit, isLoading }) {
   const tab = TABS.find((t) => t.id === activeTab)
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-3">
+    <form onSubmit={handleSubmit} className="space-y-4">
       {/* Tab bar */}
-      <div className="flex gap-1 bg-gray-800/60 p-1 rounded-xl">
+      <div className="flex gap-2 bg-slate-100/60 p-1.5 rounded-2xl border border-white/80 backdrop-blur-md shadow-inner">
         {TABS.map((t) => {
           const Icon = t.icon
           const isActive = activeTab === t.id
@@ -32,13 +32,12 @@ export default function InputTabs({ onSubmit, isLoading }) {
               key={t.id}
               type="button"
               onClick={() => { setActiveTab(t.id); setValue('') }}
-              className={`flex items-center gap-1.5 flex-1 justify-center py-2 px-2 rounded-lg text-sm font-medium transition-all ${
-                isActive
-                  ? 'bg-gray-700 text-white shadow-sm'
-                  : 'text-gray-500 hover:text-gray-300'
-              }`}
+              className={`flex items-center gap-2 flex-1 justify-center py-2.5 px-3 rounded-xl text-sm font-bold transition-all duration-300 ${isActive
+                  ? 'bg-white text-brand-600 shadow-sm border border-slate-200/60'
+                  : 'text-slate-500 hover:text-slate-800 hover:bg-white/50'
+                }`}
             >
-              <Icon size={13} className={isActive ? 'text-brand-400' : ''} />
+              <Icon size={16} className={isActive ? 'text-brand-500' : 'text-slate-400'} />
               <span className="hidden sm:inline">{t.label}</span>
             </button>
           )
@@ -52,7 +51,7 @@ export default function InputTabs({ onSubmit, isLoading }) {
           onChange={(e) => setValue(e.target.value)}
           placeholder={tab.placeholder}
           rows={7}
-          className="w-full bg-gray-800/60 border border-gray-700 rounded-xl px-4 py-3 text-sm text-gray-100 placeholder-gray-600 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500/30 resize-none transition-all"
+          className="glass-input resize-none"
           disabled={isLoading}
         />
       ) : (
@@ -61,7 +60,7 @@ export default function InputTabs({ onSubmit, isLoading }) {
           value={value}
           onChange={(e) => setValue(e.target.value)}
           placeholder={tab.placeholder}
-          className="w-full bg-gray-800/60 border border-gray-700 rounded-xl px-4 py-3 text-sm text-gray-100 placeholder-gray-600 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500/30 transition-all"
+          className="glass-input"
           disabled={isLoading}
         />
       )}
@@ -69,17 +68,17 @@ export default function InputTabs({ onSubmit, isLoading }) {
       <button
         type="submit"
         disabled={!value.trim() || isLoading}
-        className="w-full bg-brand-600 hover:bg-brand-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold py-3 rounded-xl transition-all hover:shadow-lg hover:shadow-brand-600/25 flex items-center justify-center gap-2 text-sm"
+        className="w-full btn-primary py-3.5 text-base"
       >
         {isLoading ? (
           <>
-            <span className="animate-spin h-4 w-4 border-2 border-white/40 border-t-white rounded-full" />
+            <span className="animate-spin h-5 w-5 border-2 border-white/40 border-t-white rounded-full" />
             Repurposing...
           </>
         ) : (
           <>
             Repurpose content
-            <ArrowRight size={15} />
+            <ArrowRight size={16} />
           </>
         )}
       </button>

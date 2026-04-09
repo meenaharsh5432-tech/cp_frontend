@@ -20,10 +20,16 @@ export default {
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif']
       },
+      boxShadow: {
+        'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.07)',
+        'glass-hover': '0 12px 40px 0 rgba(31, 38, 135, 0.15)',
+        'glow': '0 0 20px rgba(92, 124, 250, 0.4)'
+      },
       animation: {
         'fade-in': 'fadeIn 0.4s ease-out',
         'slide-up': 'slideUp 0.4s ease-out',
-        'spin-slow': 'spin 3s linear infinite'
+        'spin-slow': 'spin 3s linear infinite',
+        'float': 'float 6s ease-in-out infinite'
       },
       keyframes: {
         fadeIn: {
@@ -33,6 +39,10 @@ export default {
         slideUp: {
           '0%': { opacity: '0', transform: 'translateY(12px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' }
+        },
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' }
         }
       },
       backgroundImage: {
