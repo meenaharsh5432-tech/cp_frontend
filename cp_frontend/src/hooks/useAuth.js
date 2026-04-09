@@ -28,6 +28,7 @@ export function useAuth() {
 
   async function logout() {
     await api.post('/api/auth/logout')
+    localStorage.removeItem('token')
     queryClient.clear()
     navigate('/')
   }

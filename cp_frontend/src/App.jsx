@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import { useAuth } from './hooks/useAuth'
 import Landing from './pages/Landing'
 import Login from './pages/Login'
+import AuthCallback from './pages/AuthCallback'
 import Onboarding from './pages/Onboarding'
 import Dashboard from './pages/Dashboard'
 import History from './pages/History'
@@ -54,6 +55,7 @@ export default function App() {
           </PublicRoute>
         }
       />
+      <Route path="/auth/callback" element={<AuthCallback />} />
       <Route
         path="/onboarding"
         element={

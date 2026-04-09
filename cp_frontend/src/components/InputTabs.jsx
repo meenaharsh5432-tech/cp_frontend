@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { Link2, BookOpen, Youtube, FileText } from 'lucide-react'
+import { Link2, BookOpen, Youtube, FileText, ArrowRight } from 'lucide-react'
 
 const TABS = [
-  { id: 'url', label: 'URL', icon: Link2, placeholder: 'https://yourblog.com/post' },
+  { id: 'url', label: 'URL', icon: Link2, placeholder: 'https://yourblog.com/your-post' },
   { id: 'readme', label: 'README', icon: BookOpen, placeholder: 'https://github.com/user/repo' },
   { id: 'youtube', label: 'YouTube', icon: Youtube, placeholder: 'https://youtube.com/watch?v=...' },
   { id: 'text', label: 'Text', icon: FileText, placeholder: 'Paste your content here...' }
@@ -21,26 +21,24 @@ export default function InputTabs({ onSubmit, isLoading }) {
   const tab = TABS.find((t) => t.id === activeTab)
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-3">
       {/* Tab bar */}
-      <div className="flex gap-1 bg-gray-900 p-1 rounded-lg">
+      <div className="flex gap-1 bg-gray-800/60 p-1 rounded-xl">
         {TABS.map((t) => {
           const Icon = t.icon
+          const isActive = activeTab === t.id
           return (
             <button
               key={t.id}
               type="button"
-              onClick={() => {
-                setActiveTab(t.id)
-                setValue('')
-              }}
-              className={`flex items-center gap-1.5 flex-1 justify-center py-2 px-3 rounded-md text-sm font-medium transition-all ${
-                activeTab === t.id
-                  ? 'bg-gray-800 text-white shadow'
-                  : 'text-gray-400 hover:text-gray-300'
+              onClick={() => { setActiveTab(t.id); setValue('') }}
+              className={`flex items-center gap-1.5 flex-1 justify-center py-2 px-2 rounded-lg text-sm font-medium transition-all ${
+                isActive
+                  ? 'bg-gray-700 text-white shadow-sm'
+                  : 'text-gray-500 hover:text-gray-300'
               }`}
             >
-              <Icon size={14} />
+              <Icon size={13} className={isActive ? 'text-brand-400' : ''} />
               <span className="hidden sm:inline">{t.label}</span>
             </button>
           )
@@ -53,8 +51,8 @@ export default function InputTabs({ onSubmit, isLoading }) {
           value={value}
           onChange={(e) => setValue(e.target.value)}
           placeholder={tab.placeholder}
-          rows={8}
-          className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 text-sm text-gray-100 placeholder-gray-500 focus:outline-none focus:border-brand-500 resize-none"
+          rows={7}
+          className="w-full bg-gray-800/60 border border-gray-700 rounded-xl px-4 py-3 text-sm text-gray-100 placeholder-gray-600 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500/30 resize-none transition-all"
           disabled={isLoading}
         />
       ) : (
@@ -63,7 +61,7 @@ export default function InputTabs({ onSubmit, isLoading }) {
           value={value}
           onChange={(e) => setValue(e.target.value)}
           placeholder={tab.placeholder}
-          className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 text-sm text-gray-100 placeholder-gray-500 focus:outline-none focus:border-brand-500"
+          className="w-full bg-gray-800/60 border border-gray-700 rounded-xl px-4 py-3 text-sm text-gray-100 placeholder-gray-600 focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500/30 transition-all"
           disabled={isLoading}
         />
       )}
@@ -71,15 +69,18 @@ export default function InputTabs({ onSubmit, isLoading }) {
       <button
         type="submit"
         disabled={!value.trim() || isLoading}
-        className="w-full bg-brand-600 hover:bg-brand-700 disabled:opacity-40 disabled:cursor-not-allowed text-white font-semibold py-3 rounded-lg transition-colors flex items-center justify-center gap-2"
+        className="w-full bg-brand-600 hover:bg-brand-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold py-3 rounded-xl transition-all hover:shadow-lg hover:shadow-brand-600/25 flex items-center justify-center gap-2 text-sm"
       >
         {isLoading ? (
           <>
-            <span className="animate-spin h-4 w-4 border-2 border-white border-t-transparent rounded-full" />
+            <span className="animate-spin h-4 w-4 border-2 border-white/40 border-t-white rounded-full" />
             Repurposing...
           </>
         ) : (
-          'Repurpose →'
+          <>
+            Repurpose content
+            <ArrowRight size={15} />
+          </>
         )}
       </button>
     </form>

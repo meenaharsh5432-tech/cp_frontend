@@ -35,7 +35,8 @@ export default function Onboarding() {
     try {
       await api.patch('/api/voice', { voiceProfile: selectedVoice })
       await api.patch('/api/auth/onboarding-complete')
-      queryClient.invalidateQueries({ queryKey: ['me'] })
+      // Update cache immediately so ProtectedRoute sees onboardingDone: true before navigating
+      queryClient.setQueryData(['me'], (old) => old ? { ...old, onboardingDone: true } : old)
       navigate('/dashboard')
     } catch (err) {
       console.error(err)
