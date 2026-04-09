@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { Link, useSearchParams } from 'react-router-dom'
 import { LayoutDashboard, History as HistoryIcon, Settings as SettingsIcon, LogOut, Zap, Sparkles } from 'lucide-react'
 import { useAuth } from '../hooks/useAuth'
 import { useCreateJob, useJob, useJobs } from '../hooks/useJobs'
@@ -101,8 +101,9 @@ export default function Dashboard() {
   const queryClient = useQueryClient()
   const createJob = useCreateJob()
   const { data: jobs } = useJobs()
+  const [searchParams] = useSearchParams()
 
-  const [currentJobId, setCurrentJobId] = useState(null)
+  const [currentJobId, setCurrentJobId] = useState(searchParams.get('job') || null)
   const [voiceOverride, setVoiceOverride] = useState(user?.voiceProfile || 'developer')
   const [error, setError] = useState(null)
 
