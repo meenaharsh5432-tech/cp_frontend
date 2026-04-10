@@ -5,7 +5,9 @@ import Link from "next/link"
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center px-4">
+    <div className="min-h-screen bg-background flex items-center justify-center px-4 relative overflow-hidden">
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
       <div className="w-full max-w-sm">
         <div className="rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm p-8 space-y-6">
           <div className="text-center space-y-2">
