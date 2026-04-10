@@ -32,7 +32,7 @@ export function useAuth() {
   }, [fetchUser])
 
   const login = () => {
-    window.location.href = api.googleLoginUrl
+    window.location.href = "/api/auth/login"
   }
 
   const logout = async () => {

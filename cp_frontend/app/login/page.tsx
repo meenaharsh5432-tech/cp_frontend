@@ -1,6 +1,5 @@
 "use client"
 
-import { api } from "@/lib/api"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
@@ -21,7 +20,7 @@ export default function LoginPage() {
 
           <Button
             className="w-full bg-white text-gray-900 hover:bg-gray-100 border border-gray-200 gap-3"
-            onClick={() => { window.location.href = api.googleLoginUrl }}
+            onClick={() => { window.location.href = "/api/auth/login" }}
           >
             <svg className="h-5 w-5" viewBox="0 0 24 24">
               <path
