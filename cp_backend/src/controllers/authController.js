@@ -68,15 +68,9 @@ export async function googleCallback(request, reply) {
 }
 
 export async function getMe(request, reply) {
-  const { id, email, name, tier, voiceProfile, customVoicePrompt, quotaUsed, quotaResetAt, onboardingDone, createdAt } =
+  const { id, email, name, tier, voiceProfile, quotaUsed, quotaResetAt, onboardingDone, createdAt } =
     request.user
-  return reply.send({ id, email, name, tier, voiceProfile, customVoicePrompt, quotaUsed, quotaResetAt, onboardingDone, createdAt })
-}
-
-export async function deleteAccount(request, reply) {
-  const prisma = getPrisma()
-  await prisma.user.delete({ where: { id: request.user.id } })
-  return reply.send({ ok: true })
+  return reply.send({ id, email, name, tier, voiceProfile, quotaUsed, quotaResetAt, onboardingDone, createdAt })
 }
 
 export async function logout(request, reply) {
